@@ -6,8 +6,10 @@ gem 'pubnub', '5.2.2'
 gem 'faraday', '2.7.4'
 gem 'faraday-multipart', '1.0.4'
 gem 'faye-websocket', '0.11.2'
+gem 'simplecov'
+gem 'simplecov-cobertura'
 
 group :test do
-  gem 'dotenv'
-  gem 'rspec'
+  gem 'dotenv', '2.1.1'
+  gem 'rspec' , '3.13.0'
 end
