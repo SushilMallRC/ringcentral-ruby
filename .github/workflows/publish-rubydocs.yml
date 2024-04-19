@@ -18,8 +18,6 @@ jobs:
           ruby-version: '3.2'
       - name: Install dependencies
         run: bundle install
-      - name: Install dependencies
-        run: gem install yard
 
       - name: Generate Documentation
         run: yard doc
