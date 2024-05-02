@@ -5,17 +5,21 @@ on:
     tags:
       - '*'
 jobs:
-  build:
+  Release:
+    environment: prod
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Release Gem
-        if: contains(github.ref, 'refs/tags')
-        uses: cadwallion/publish-rubygems-action@master
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          RUBYGEMS_API_KEY: ${{secrets.RUBYGEMS_API_KEY}}
-          RELEASE_COMMAND: rake release
+      - uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+      - name: Install dependencies
+        run: bundle install
+      - name: Build gem
+        run: |
+          gem build test-rc-sdk.gemspec
+
+      - name: Publish gem
+        run: |
+          gem push test-rc-sdk-*.gem --key ${{ secrets.RUBYGEMS_API_KEY }} --host https://rubygems.org
