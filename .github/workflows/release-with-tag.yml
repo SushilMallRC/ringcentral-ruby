@@ -22,6 +22,8 @@ jobs:
           TAG_NAME=${GITHUB_REF#refs/tags/}
           VERSION=$(echo "$TAG_NAME" | sed 's/^v//')
           echo "::set-output name=version::$VERSION"
+      - name: Update gemspec file with version
+        run: sed -i "s/gem.version\s*=\s*'.*'/gem.version = '${{ steps.extract_version.outputs.version }}'/" test-rc-sdk.gemspec
       - name: Build gem
         run: |
           gem build test-rc-sdk.gemspec
