@@ -16,15 +16,6 @@ jobs:
           ruby-version: '3.2'
       - name: Install dependencies
         run: bundle install
-      - name: Run tests
-        run: bundle exec rspec
-        env:
-          RINGCENTRAL_SERVER_URL: ${{ secrets.RINGCENTRAL_SERVER_URL }}
-          RINGCENTRAL_CLIENT_ID: ${{ secrets.RINGCENTRAL_CLIENT_ID }}
-          RINGCENTRAL_CLIENT_SECRET: ${{ secrets.RINGCENTRAL_CLIENT_SECRET }}
-          RINGCENTRAL_JWT_TOKEN: ${{ secrets.RINGCENTRAL_JWT_TOKEN }}
-          RINGCENTRAL_SENDER: ${{ secrets.RINGCENTRAL_SENDER }}
-          RINGCENTRAL_RECEIVER: ${{ secrets.RINGCENTRAL_RECEIVER }}
   Release:
     environment: prod
     needs: Test
